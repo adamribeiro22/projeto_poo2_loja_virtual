@@ -7,9 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\" />
-    <Folder Include="Abstraction\" />
-    <Folder Include="Persistence\Configuration\" />
+    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Persistence\Configurations\" />
   </ItemGroup>
 
 </Project>
