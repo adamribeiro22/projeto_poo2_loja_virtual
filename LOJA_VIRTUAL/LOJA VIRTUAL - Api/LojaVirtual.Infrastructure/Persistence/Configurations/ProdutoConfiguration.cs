@@ -4,6 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LojaVirtual.Infrastructure.Persistence.Configurations
 {
+    /// <summary>
+    /// Configuração da entidade Produto para o Entity Framework Core.
+    /// Aqui a gente define como a tabela PRODUTOS será mapeada no banco de dados.
+    /// Representa as flags dos atributos do banco de dados, atrelada ao AppDbContext.
+    /// </summary>
     public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
