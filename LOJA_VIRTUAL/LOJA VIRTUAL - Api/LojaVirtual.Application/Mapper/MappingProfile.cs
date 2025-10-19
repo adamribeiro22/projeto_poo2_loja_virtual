@@ -16,20 +16,37 @@ namespace LojaVirtual.Application.Mapper
     {
         public MappingProfile()
         {
-            // Ensina ao AutoMapper a transformar um  ProdutoCreateDTO em um Produto
             CreateMap<ProdutoCreateDTO, Produto>();
-            // Ensina ao AutoMapper a transformar um  Produto em um ProdutoDisplayDTO
-            CreateMap<Produto, ProdutoDisplayDTO>();
-            // Ensina ao AutoMapper a transformar um ProdutoQueryDTO em um ProdutoFilter
             CreateMap<ProdutoQueryDTO, ProdutoFilter>();
+            CreateMap<Produto, ProdutoDisplayDTO>();
 
             CreateMap<VariacaoProdutoCreateDTO, VariacaoProduto>();
-            CreateMap<VariacaoProduto, VariacaoProdutoDisplayDTO>();
             CreateMap<VariacaoProdutoQueryDTO, VariacaoProdutoFilter>();
+            CreateMap<VariacaoProduto, VariacaoProdutoDisplayDTO>();
+
+            CreateMap<EstoqueCreateDTO, Estoque>();
+            CreateMap<EstoqueQueryDTO, EstoqueFilter>();
+            CreateMap<Estoque, EstoqueDisplayDTO>();
 
             CreateMap<RegisterRequestDTO, Usuario>();
             CreateMap<Usuario, UsuarioDisplayDTO>()    
                 .ForMember(dest => dest.Tipo, opt => opt.MapFrom(src => src.Tipo.ToString())); // Usuario tem Enum, DTO tem string, aqui ele faz essa conversão pra string
+
+            CreateMap<VendaCreateDTO, Venda>();
+            CreateMap<VendaQueryDTO, VendaFilter>();
+            CreateMap<Venda, VendaDisplayDTO>()
+                .ForMember(
+                    dest => dest.NomeUsuario,
+                    opt => opt.MapFrom(src => src.Usuario != null ? src.Usuario.Nome : "Utilizador Removido")
+                )
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+
+            CreateMap<ItemVendaCreateDTO, ItemVenda>();
+            CreateMap<ItemVendaQueryDTO, ItemVendaFilter>();
+            CreateMap<ItemVenda, ItemVendaDisplayDTO>()
+                .ForMember(dest => dest.NomeProduto, opt => opt.MapFrom(src => src.VariacaoProduto.Produto.Nome))
+                .ForMember(dest => dest.Tamanho, opt => opt.MapFrom(src => src.VariacaoProduto.Tamanho))
+                .ForMember(dest => dest.Cor, opt => opt.MapFrom(src => src.VariacaoProduto.Cor));
         }
     }
 }

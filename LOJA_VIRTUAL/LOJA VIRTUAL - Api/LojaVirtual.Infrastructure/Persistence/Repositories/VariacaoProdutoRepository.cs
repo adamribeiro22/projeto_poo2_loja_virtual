@@ -45,5 +45,13 @@ namespace LojaVirtual.Infrastructure.Persistence.Repositories
 
             return await queryVariacoes.ToListAsync();
         }
+
+        public async Task<List<VariacaoProduto>> GetByIdsWithStockAsync(IEnumerable<int> ids)
+        {
+            return await _context.VariacoesProduto
+                                 .Include(vp => vp.Estoque)
+                                 .Where(vp => ids.Contains(vp.Id))
+                                 .ToListAsync();
+        }
     }
 }

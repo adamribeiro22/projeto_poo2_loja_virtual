@@ -1,55 +1,57 @@
 ﻿using LojaVirtual.Application.Abstraction;
 using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Query;
-using Microsoft.AspNetCore.Authorization;
+using LojaVirtual.Application.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LojaVirtual.Api.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     // [Authorize]
-    public class VariacaoProdutosController : ControllerBase
+    public class EstoqueController : ControllerBase
     {
-        private readonly IVariacaoProdutoService _variacaoProdutoService;
+        private readonly IEstoqueService _estoqueService;
 
-        public VariacaoProdutosController(IVariacaoProdutoService variacaoProdutoService)
+        public EstoqueController(IEstoqueService estoqueService)
         {
-            _variacaoProdutoService = variacaoProdutoService;
+            _estoqueService = estoqueService;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAll([FromQuery] VariacaoProdutoQueryDTO? query)
+        // [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAll([FromQuery] EstoqueQueryDTO? query)
         {
-            var variacoes = await _variacaoProdutoService.GetAllAsync(query);
-            return Ok(variacoes);
+            var estoque = await _estoqueService.GetAllAsync(query);
+            return Ok(estoque);
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        // [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById(int id)
         {
-            var variacao = await _variacaoProdutoService.GetByIdAsync(id);
+            var estoque = await _estoqueService.GetByIdAsync(id);
 
-            if (variacao == null)
+            if(estoque == null)
             {
                 return NotFound();
             }
 
-            return Ok(variacao);
+            return Ok(estoque);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         // [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([FromBody] VariacaoProdutoCreateDTO criarVariacaoProdutoDTO)
+        public async Task<IActionResult> Create([FromBody] EstoqueCreateDTO criarEstoqueDTO)
         {
-            var novaVariacao = await _variacaoProdutoService.CreateAsync(criarVariacaoProdutoDTO);
-
-            return CreatedAtAction(nameof(GetById), new { id = novaVariacao.Id }, novaVariacao);
+            var novoEstoque = await _estoqueService.CreateAsync(criarEstoqueDTO);
+            return CreatedAtAction(nameof(GetById), new { id = novoEstoque.Id }, novoEstoque);
         }
 
         [HttpPut("{id}")]
@@ -57,15 +59,15 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         // [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Update(int id, [FromBody] VariacaoProdutoCreateDTO atualizarVariacaoProdutoDTO)
+        public async Task<IActionResult> Update(int id, [FromBody] EstoqueCreateDTO atualizarEstoqueDTO)
         {
-            var variacaoExistente = await _variacaoProdutoService.GetByIdAsync(id);
-            if (variacaoExistente == null)
+            var estoqueExistente = await _estoqueService.GetByIdAsync(id);
+            if (estoqueExistente == null)
             {
                 return NotFound();
             }
 
-            await _variacaoProdutoService.UpdateAsync(id, atualizarVariacaoProdutoDTO);
+            await _estoqueService.UpdateAsync(id, atualizarEstoqueDTO);
 
             return NoContent();
         }
@@ -76,13 +78,13 @@ namespace LojaVirtual.Api.Controllers
         // [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
-            var variacaoExistente = await _variacaoProdutoService.GetByIdAsync(id);
-            if (variacaoExistente == null)
+            var estoqueExistente = await _estoqueService.GetByIdAsync(id);
+            if (estoqueExistente == null)
             {
                 return NotFound();
             }
 
-            await _variacaoProdutoService.DeleteAsync(id);
+            await _estoqueService.DeleteAsync(id);
 
             return NoContent();
         }

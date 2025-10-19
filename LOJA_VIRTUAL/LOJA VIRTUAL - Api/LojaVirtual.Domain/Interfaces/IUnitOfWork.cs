@@ -9,6 +9,8 @@
         IProdutoRepository ProdutoRepository { get; }
         IVariacaoProdutoRepository VariacaoProdutoRepository { get; }
         IUsuarioRepository UsuarioRepository { get; }
+        IEstoqueRepository EstoqueRepository { get; }
+        IVendaRepository VendaRepository { get; }
         // Lembrar de adicionar todos repositórios aqui
 
         Task<int> CommitAsync();

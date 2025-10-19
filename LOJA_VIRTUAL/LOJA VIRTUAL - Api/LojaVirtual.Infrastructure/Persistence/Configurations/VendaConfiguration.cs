@@ -16,6 +16,7 @@ namespace LojaVirtual.Infrastructure.Persistence.Configurations
             builder.Property(v => v.UsuarioId).HasColumnName("ID_USUARIO");
             builder.Property(v => v.DataVenda).HasColumnName("DT_VENDA").IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Property(v => v.ValorTotal).HasColumnName("VL_TOTAL_VENDA").IsRequired().HasColumnType("decimal(10, 2)");
+            builder.Property(v => v.Status).HasColumnName("TP_STATUS").IsRequired();
 
             builder.Property(v => v.CriadoEm).HasColumnName("DT_CRIADO_EM").IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Property(v => v.AtualizadoEm).HasColumnName("DT_ATUALIZADO_EM").IsRequired();
