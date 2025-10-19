@@ -1,4 +1,6 @@
+using System.Text;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using LojaVirtual.Application.Abstraction;
 using LojaVirtual.Application.DTO.Validators;
 using LojaVirtual.Application.Mapper;
@@ -6,7 +8,9 @@ using LojaVirtual.Application.Service;
 using LojaVirtual.Domain.Interfaces;
 using LojaVirtual.Infrastructure.Persistence;
 using LojaVirtual.Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,19 +23,42 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Injeção de Dependência (DI) dos repositórios é registrada aqui, sempre que chamar "IProdutoRepository" uma interface, você recebera a implementação dela "ProdutoRepository", isso evita acoplamento.
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IVariacaoProdutoRepository, VariacaoProdutoRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Injeção de Dependência (DI) dos serviços é registrada aqui
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IVariacaoProdutoService, VariacaoProdutoService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
-// Configurando o AutoMapper, busca todas as classes que herdam de Profile
+// Configurando o AutoMapper, busca todas as classes que herdam de ProfileRegisterRequestDTOValidator
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
-// Configurando o FluentValidator para validar e informar erros de criação/atualização
-builder.Services.AddValidatorsFromAssemblyContaining<ProdutoCreateDTOValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<VariacaoProdutoCreateDTOValidator>();
+// Configurando o FluentValidator, ele vai no assembly do "RegisterRequestDTOValidator" e busca todas classes que tbm usam o fluentvalidator
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterRequestDTOValidator>();
 
+// Configurando a autenticação JWT para proteger os endpoints da API entre os tipos de usuários
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

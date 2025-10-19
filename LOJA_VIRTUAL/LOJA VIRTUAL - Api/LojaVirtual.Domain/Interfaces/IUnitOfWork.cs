@@ -8,6 +8,7 @@
     {
         IProdutoRepository ProdutoRepository { get; }
         IVariacaoProdutoRepository VariacaoProdutoRepository { get; }
+        IUsuarioRepository UsuarioRepository { get; }
         // Lembrar de adicionar todos repositórios aqui
 
         Task<int> CommitAsync();

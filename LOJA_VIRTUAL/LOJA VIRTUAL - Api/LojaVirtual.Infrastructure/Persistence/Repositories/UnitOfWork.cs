@@ -11,6 +11,7 @@ namespace LojaVirtual.Infrastructure.Persistence.Repositories
         private readonly AppDbContext _context;
         public IProdutoRepository ProdutoRepository { get; }
         public IVariacaoProdutoRepository VariacaoProdutoRepository { get; }
+        public IUsuarioRepository UsuarioRepository { get; }
         // Lembrar de adicionar todos IRepository exatamente aqui
 
         public UnitOfWork(AppDbContext context)
@@ -18,6 +19,7 @@ namespace LojaVirtual.Infrastructure.Persistence.Repositories
             _context = context;
             ProdutoRepository = new ProdutoRepository(_context);
             VariacaoProdutoRepository = new VariacaoProdutoRepository(_context);
+            UsuarioRepository = new UsuarioRepository(_context);
             // Lembrar de adicionar todos repositórios aqui
         }
 

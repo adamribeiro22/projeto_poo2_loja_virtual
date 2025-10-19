@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LojaVirtual.Application.DTO.Auth;
 using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Display;
 using LojaVirtual.Application.DTO.Query;
@@ -25,6 +26,10 @@ namespace LojaVirtual.Application.Mapper
             CreateMap<VariacaoProdutoCreateDTO, VariacaoProduto>();
             CreateMap<VariacaoProduto, VariacaoProdutoDisplayDTO>();
             CreateMap<VariacaoProdutoQueryDTO, VariacaoProdutoFilter>();
+
+            CreateMap<RegisterRequestDTO, Usuario>();
+            CreateMap<Usuario, UsuarioDisplayDTO>()    
+                .ForMember(dest => dest.Tipo, opt => opt.MapFrom(src => src.Tipo.ToString())); // Usuario tem Enum, DTO tem string, aqui ele faz essa conversão pra string
         }
     }
 }

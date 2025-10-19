@@ -1,12 +1,14 @@
 ﻿using LojaVirtual.Application.Abstraction;
 using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LojaVirtual.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class VariacaoProdutosController : ControllerBase
     {
         private readonly IVariacaoProdutoService _variacaoProdutoService;
@@ -42,6 +44,7 @@ namespace LojaVirtual.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] VariacaoProdutoCreateDTO criarVariacaoProdutoDTO)
         {
             var novaVariacao = await _variacaoProdutoService.CreateAsync(criarVariacaoProdutoDTO);
@@ -53,6 +56,7 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, [FromBody] VariacaoProdutoCreateDTO atualizarVariacaoProdutoDTO)
         {
             var variacaoExistente = await _variacaoProdutoService.GetByIdAsync(id);
@@ -69,6 +73,7 @@ namespace LojaVirtual.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var variacaoExistente = await _variacaoProdutoService.GetByIdAsync(id);
