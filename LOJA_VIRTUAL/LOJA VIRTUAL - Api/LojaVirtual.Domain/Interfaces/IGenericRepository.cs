@@ -12,8 +12,8 @@ namespace LojaVirtual.Domain.Interfaces
         Task CreateAsync(T entity);
         Task CreateRangeAsync(IEnumerable<T> entities);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T?> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes); // Permitem parâmetros de buscas, incluindo dados sobre entidades relacionadas
+        Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes);   
         void Delete(T entity);
         void DeleteRange(IEnumerable<T> entities);
         void Update(T entity);

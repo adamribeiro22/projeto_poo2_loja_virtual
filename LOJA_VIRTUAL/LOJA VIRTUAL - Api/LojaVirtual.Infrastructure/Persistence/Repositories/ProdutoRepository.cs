@@ -25,7 +25,7 @@ namespace LojaVirtual.Infrastructure.Persistence.Repositories
 
             if (!string.IsNullOrWhiteSpace(filter.Categoria))
             {
-                queryProdutos = queryProdutos.Where(p => p.Categoria != null && p.Categoria == filter.Categoria);
+                queryProdutos = queryProdutos.Where(p => p.Categoria.Contains(filter.Categoria));
             }
 
             if (filter.Ativo.HasValue)

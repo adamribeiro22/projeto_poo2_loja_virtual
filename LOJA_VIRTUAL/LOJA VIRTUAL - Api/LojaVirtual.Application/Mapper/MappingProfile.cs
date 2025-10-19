@@ -17,12 +17,14 @@ namespace LojaVirtual.Application.Mapper
         {
             // Ensina ao AutoMapper a transformar um  ProdutoCreateDTO em um Produto
             CreateMap<ProdutoCreateDTO, Produto>();
-
             // Ensina ao AutoMapper a transformar um  Produto em um ProdutoDisplayDTO
             CreateMap<Produto, ProdutoDisplayDTO>();
-
             // Ensina ao AutoMapper a transformar um ProdutoQueryDTO em um ProdutoFilter
             CreateMap<ProdutoQueryDTO, ProdutoFilter>();
+
+            CreateMap<VariacaoProdutoCreateDTO, VariacaoProduto>();
+            CreateMap<VariacaoProduto, VariacaoProdutoDisplayDTO>();
+            CreateMap<VariacaoProdutoQueryDTO, VariacaoProdutoFilter>();
         }
     }
 }

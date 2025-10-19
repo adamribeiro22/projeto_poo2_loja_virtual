@@ -7,6 +7,7 @@
     public interface IUnitOfWork : IDisposable
     {
         IProdutoRepository ProdutoRepository { get; }
+        IVariacaoProdutoRepository VariacaoProdutoRepository { get; }
         // Lembrar de adicionar todos repositórios aqui
 
         Task<int> CommitAsync();

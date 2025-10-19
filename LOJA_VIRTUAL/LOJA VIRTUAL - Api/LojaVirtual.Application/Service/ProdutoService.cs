@@ -6,6 +6,7 @@ using LojaVirtual.Application.DTO.Query;
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Filters;
 using LojaVirtual.Domain.Interfaces;
+using LojaVirtual.Infrastructure.Helper.Atelie.Core.Utils;
 
 namespace LojaVirtual.Application.Service
 {
@@ -30,6 +31,7 @@ namespace LojaVirtual.Application.Service
         public async Task<ProdutoDisplayDTO> CreateAsync(ProdutoCreateDTO criarProdutoDisplayDTO)
         {
             var produto = _mapper.Map<Produto>(criarProdutoDisplayDTO);
+            AuditHelper.UpdateAuditFields(produto);
             produto.Ativo = true;
 
             await _unitOfWork.ProdutoRepository.CreateAsync(produto);
@@ -75,6 +77,7 @@ namespace LojaVirtual.Application.Service
             if (produtoExistente != null)
             {
                 _mapper.Map(atualizarProdutoDisplayDTO, produtoExistente);
+                AuditHelper.UpdateAuditFields(produtoExistente);
 
                 _unitOfWork.ProdutoRepository.Update(produtoExistente);
                 await _unitOfWork.CommitAsync();
