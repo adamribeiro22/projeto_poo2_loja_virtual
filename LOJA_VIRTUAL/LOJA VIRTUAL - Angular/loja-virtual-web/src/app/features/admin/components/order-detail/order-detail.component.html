@@ -1,1 +1,61 @@
-<p>order-detail works!</p>
+<div class="order-detail-container" *ngIf="venda$ | async as venda; else loading">
+  <button (click)="voltarParaLista()" class="back-button">
+    <i class="fa fa-angle-double-left" aria-hidden="true"></i> Voltar
+  </button>
+
+  <h2>Pedido #{{ venda.id }}</h2>
+
+  <div class="details-grid-cards">
+    <div class="detail-card">
+      <i class="fas fa-user icon"></i>
+      <small>Cliente</small>
+      <strong>{{ venda.nomeUsuario }}</strong>
+    </div>
+    <div class="detail-card">
+      <i class="fas fa-calendar-alt icon"></i>
+      <small>Data</small>
+      <strong>{{ venda.dataVenda | date: 'dd/MM/yyyy HH:mm' }}</strong>
+    </div>
+    <div class="detail-card">
+      <i class="fas fa-hourglass-half icon"></i>
+      <small>Status</small>
+      <strong class="status" [ngClass]="getStatusNome(venda.status).toLowerCase()">
+        {{ getStatusNome(venda.status) }}
+      </strong>
+    </div>
+    <div class="detail-card total-card">
+      <i class="fas fa-coins icon"></i>
+      <small>Valor Total</small>
+      <strong class="valor-total">{{ venda.valorTotal | currency: 'BRL' }}</strong>
+    </div>
+  </div>
+
+  <h3>Itens Comprados</h3>
+
+  <div class="items-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Variação</th>
+          <th>Qtd.</th>
+          <th>Preço Unit.</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of venda.itens">
+          <td>{{ item.nomeProduto }}</td>
+          <td>{{ item.tamanho }} / {{ item.cor }}</td>
+          <td>{{ item.quantidade }}</td>
+          <td>{{ item.precoUnitario | currency: 'BRL' }}</td>
+          <td>{{ item.subtotal | currency: 'BRL' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>A carregar detalhes do pedido...</p>
+</ng-template>

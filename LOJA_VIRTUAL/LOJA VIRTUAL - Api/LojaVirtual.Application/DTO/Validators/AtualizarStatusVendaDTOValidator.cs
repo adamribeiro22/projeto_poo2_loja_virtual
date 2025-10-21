@@ -9,7 +9,7 @@ namespace LojaVirtual.Application.DTO.Validators
         public AtualizarStatusVendaDTOValidator()
         {
             RuleFor(x => x.NovoStatus)
-                .IsInEnum().WithMessage("O status fornecido é inválido.");
+                .NotEmpty().WithMessage("O status fornecido não pode ser nulo.");
         }
     }
 }

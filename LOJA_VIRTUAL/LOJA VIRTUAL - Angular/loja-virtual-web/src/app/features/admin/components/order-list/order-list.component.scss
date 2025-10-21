@@ -1,0 +1,137 @@
+.order-list-container {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tbody tr:hover {
+      background-color: var(--background-muted);
+    }
+  }
+}
+
+.status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+  display: inline-block;
+  min-width: 90px;
+
+  &.pendente { background-color: var(--status-pendente); }
+  &.confirmada { background-color: var(--status-confirmado); }
+  &.enviada { background-color: var(--status-enviado); }
+  &.entregue { background-color: var(--status-entregue); }
+  &.cancelada { background-color: var(--status-cancelado); }
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  .action-button {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    color: var(--text-on-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(0.92);
+    }
+  }
+}
+
+.view-button {
+  background-color: var(--btn-detalhes);
+}
+
+.confirm-button {
+  background-color: var(--btn-confirmar);
+}
+
+.ship-button {
+  background-color: var(--btn-enviar);
+
+  position: relative;
+  overflow: hidden;
+
+  i {
+    position: relative;
+    display: inline-block;
+    transition: transform 1s ease-in-out;
+  }
+
+  &.animar i {
+    transform: translateX(210%);
+  }
+}
+
+.deliver-button {
+  background-color: var(--btn-entregar);
+}
+
+.state-container {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}

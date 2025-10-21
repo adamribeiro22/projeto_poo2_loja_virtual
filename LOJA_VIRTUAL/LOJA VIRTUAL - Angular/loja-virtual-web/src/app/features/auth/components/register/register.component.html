@@ -1,0 +1,59 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2 class="title">Crie a sua Conta</h2>
+    <p class="subtitle">É rápido e fácil.</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      
+      <div class="form-group">
+        <label for="nome">Nome Completo</label>
+        <input id="nome" type="text" formControlName="nome" placeholder="Seu nome completo"
+          [ngClass]="{ 'is-invalid': registerForm.get('nome')?.touched && registerForm.get('nome')?.invalid }">
+        
+        <div *ngIf="registerForm.get('nome')?.touched && registerForm.get('nome')?.invalid" class="validation-error">
+          <small *ngIf="registerForm.get('nome')?.errors?.['required']">O nome é obrigatório.</small>
+          <small *ngIf="registerForm.get('nome')?.errors?.['minlength']">O nome deve ter pelo menos 3 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" formControlName="email" placeholder="seuemail@exemplo.com"
+          [ngClass]="{ 'is-invalid': registerForm.get('email')?.touched && registerForm.get('email')?.invalid }">
+        
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="validation-error">
+          <small *ngIf="registerForm.get('email')?.errors?.['required']">O e-mail é obrigatório.</small>
+          <small *ngIf="registerForm.get('email')?.errors?.['email']">Por favor, insira um e-mail válido.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" formControlName="senha" placeholder="Mínimo de 8 caracteres"
+          [ngClass]="{ 'is-invalid': registerForm.get('senha')?.touched && registerForm.get('senha')?.invalid }">
+        
+        <div *ngIf="registerForm.get('senha')?.touched && registerForm.get('senha')?.invalid" class="validation-error">
+          <small *ngIf="registerForm.get('senha')?.errors?.['required']">A senha é obrigatória.</small>
+          <small *ngIf="registerForm.get('senha')?.errors?.['minlength']">A senha deve ter pelo menos 8 caracteres.</small>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="api-error-message">
+        {{ errorMessage }}
+      </div>
+      
+      <button type="submit" [disabled]="registerForm.invalid || isLoading" class="submit-button">
+        <span *ngIf="!isLoading">Registar</span>
+        <span *ngIf="isLoading" class="loader"></span>
+      </button>
+
+      <div class="login-link">
+        <p>
+            Já tem uma conta? <br>
+            <a routerLink="/auth/login">Faça login aqui</a>
+        </p>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,4 +1,6 @@
-﻿namespace LojaVirtual.Application.DTO.Creation
+﻿using LojaVirtual.Application.DTO.Display;
+
+namespace LojaVirtual.Application.DTO.Creation
 {
     /// <summary>
     /// DTO para criação de um produto.
@@ -9,7 +11,7 @@
         public string? Tamanho { get; set; }
         public string? Cor { get; set; }
         public decimal Preco { get; set; }
-        public int QuantidadeEstoqueInicial { get; set; } = 0;
+        public int QuantidadeEstoqueInicial { get; set; }
     }
 
 }

@@ -10,5 +10,7 @@
         public string? Descricao { get; set; }
         public string? Categoria { get; set; }
         public bool Ativo { get; set; }
+
+        public List<VariacaoProdutoDisplayDTO> Variacoes { get; set; }
     }
 }

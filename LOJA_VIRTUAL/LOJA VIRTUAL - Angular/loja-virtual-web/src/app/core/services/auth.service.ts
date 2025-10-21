@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { AuthResponse } from '../models/auth-response.model';
 import { Usuario } from '../models/usuario.model';
 
-// Permite injeção em outras classes, somente pelo root, ou seja, torna esse serviço um singleton.
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +12,8 @@ import { Usuario } from '../models/usuario.model';
 export class AuthService {
   private apiUrl = environment.apiUrl + '/api/Auth';
   private usuarioAtualSubject = new BehaviorSubject<Usuario | null>(null);
-  private usuarioAtual$ = this.usuarioAtualSubject.asObservable();
+  public usuarioAtual$ = this.usuarioAtualSubject.asObservable();
 
-  // router muito usado para redirecionamento entre páginas, e o http para as requisições
   constructor(private http: HttpClient, private router: Router) {
     this.carregarUsuarioLogado();
    }
@@ -29,6 +27,17 @@ export class AuthService {
         }
       })
     )
+  }
+
+  register(dadosRegistro: any): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, dadosRegistro).pipe(
+      tap(response => {
+        if (response.sucesso && response.token && response.usuario) {
+          this.guardarSessao(response.token, response.usuario);
+          this.redirecionarAposLogin('Comum');
+        }
+      })
+    );
   }
 
   logout(): void {

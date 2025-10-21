@@ -1,1 +1,75 @@
-<p>product-management works!</p>
+<div class="product-management-container">
+  <h2><i class="fa-solid fa-boxes-stacked"></i> Gestão de Produtos</h2>
+
+  <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-section">
+      <h3><i class="fa-solid fa-info-circle"></i> Dados do Produto</h3>
+      <div class="form-group">
+        <label for="nome">Nome do Produto</label>
+        <input id="nome" type="text" formControlName="nome" placeholder="Ex: Camiseta Branca">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" formControlName="descricao" rows="3" placeholder="Descreva o produto..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="categoria">Categoria</label>
+        <input id="categoria" type="text" formControlName="categoria" placeholder="Ex: Roupas">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3><i class="fa-solid fa-layer-group"></i> Variações e Estoque</h3>
+      <div formArrayName="variacoes">
+        <div *ngFor="let variacao of variacoes.controls; let i = index" [formGroupName]="i" class="variacao-item">
+          <h4><i class="fa-solid fa-sliders"></i> Variação {{ i + 1 }}</h4>
+          <div class="variacao-grid">
+            <div class="form-group">
+              <label>Tamanho</label>
+              <input type="text" formControlName="tamanho" placeholder="Ex: M">
+            </div>
+            <div class="form-group">
+              <label>Cor</label>
+              <input type="text" formControlName="cor" placeholder="Ex: Azul">
+            </div>
+            <div class="form-group">
+              <label>Preço (R$)</label>
+              <input type="number" formControlName="preco" placeholder="Ex: 59.90">
+            </div>
+            <div class="form-group">
+              <label>Estoque Inicial</label>
+              <input type="number" formControlName="quantidadeEstoqueInicial" placeholder="Ex: 10">
+            </div>
+          </div>
+          <button
+            type="button"
+            (click)="removerVariacao(i)"
+            class="remove-button"
+            *ngIf="variacoes.length > 1">
+            <i class="fa-solid fa-trash"></i> Remover Variação
+          </button>
+        </div>
+      </div>
+      <button type="button" (click)="adicionarVariacao()" class="add-button">
+        <i class="fa-solid fa-plus"></i> Adicionar outra variação
+      </button>
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      <i class="fa-solid fa-check-circle"></i> {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      <i class="fa-solid fa-circle-exclamation"></i> {{ errorMessage }}
+    </div>
+
+    <button type="submit" [disabled]="produtoForm.invalid || isLoading" class="submit-button">
+      <ng-container *ngIf="!isLoading">
+        <i class="fa-solid fa-floppy-disk"></i> Salvar Produto
+      </ng-container>
+      <ng-container *ngIf="isLoading">
+        <span class="loader"></span>
+      </ng-container>
+    </button>
+  </form>
+</div>

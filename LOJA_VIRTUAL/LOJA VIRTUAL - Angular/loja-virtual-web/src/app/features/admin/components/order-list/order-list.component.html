@@ -1,1 +1,54 @@
-<p>order-list works!</p>
+<div class="order-list-container">
+  <h2>Lista de Pedidos</h2>
+
+  <div class="table-wrapper" *ngIf="!isLoading; else loading">
+    <table *ngIf="vendas.length > 0; else noOrders">
+      <thead>
+        <tr>
+          <th>ID do Pedido</th>
+          <th>Cliente</th>
+          <th>Data</th>
+          <th>Status</th>
+          <th>Valor Total</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venda of vendas">
+          <td>#{{ venda.id }}</td>
+          <td>{{ venda.nomeUsuario }}</td>
+          <td>{{ venda.dataVenda | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <span class="status" [ngClass]="getStatusNome(venda.status).toLowerCase()">
+              {{ getStatusNome(venda.status) }}
+            </span>
+          </td>
+          <td>{{ venda.valorTotal | currency: 'BRL' }}</td>
+          <td class="actions-cell">
+            <button (click)="verDetalhes(venda.id)" class="action-button view-button" title="Ver Detalhes">
+              <i class="fa fa-eye"></i>
+            </button>
+            <button *ngIf="venda.status === StatusVendaEnum.Pendente" (click)="atualizarStatus(venda.id, StatusVendaEnum.Confirmada)" class="action-button confirm-button" title="Confirmar">
+              <i class="fa fa-check"></i>
+            </button>
+            <button 
+              *ngIf="venda.status === StatusVendaEnum.Confirmada" (click)="animarCaminhao(venda)" [class.animar]="isAnimando(venda)" class="action-button ship-button" title="Enviar">
+              <i class="fa fa-truck"></i>
+            </button>
+            <button *ngIf="venda.status === StatusVendaEnum.Enviada" (click)="atualizarStatus(venda.id, StatusVendaEnum.Entregue)" class="action-button deliver-button" title="Entregue">
+              <i class="fa fa-box-open"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #loading>
+    <p>A carregar pedidos...</p>
+  </ng-template>
+
+  <ng-template #noOrders>
+    <p>Nenhum pedido encontrado.</p>
+  </ng-template>
+</div>

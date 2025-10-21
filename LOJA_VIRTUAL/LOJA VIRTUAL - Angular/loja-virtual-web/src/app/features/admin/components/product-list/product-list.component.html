@@ -1,0 +1,67 @@
+<div class="product-list-container">
+  <div class="header">
+    <h2><i class="fa-solid fa-boxes-stacked"></i> Produtos</h2>
+    <button (click)="criarNovoProduto()" class="create-button">
+      <i class="fa-solid fa-plus"></i> Criar Novo Produto
+    </button>
+  </div>
+  
+  <div class="filter-container" [formGroup]="filtroForm">
+    <input formControlName="nome" placeholder="Filtrar por nome...">
+    <input formControlName="categoria" placeholder="Filtrar por categoria...">
+    <select formControlName="ativo">
+      <option [ngValue]="null">Todos</option>
+      <option [ngValue]="true">Ativos</option>
+      <option [ngValue]="false">Inativos</option>
+    </select>
+
+    <button (click)="limparFiltros()" class="clear-button">
+        <i class="fa-solid fa-eraser"></i> Limpar
+    </button>
+  </div>
+
+  <div class="table-wrapper">
+    <table *ngIf="!isLoading && produtos.length > 0; else noResults">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <td>#{{ produto.id }}</td>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.categoria || 'N/A' }}</td>
+          <td>
+            <span class="status" [class.active]="produto.ativo">
+              {{ produto.ativo ? 'Ativo' : 'Inativo' }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <button (click)="editarProduto(produto.id)" class="action-button edit-button">
+              <i class="fa-solid fa-pencil"></i> Editar
+            </button>
+            <button (click)="toggleAtivo(produto.id, produto.ativo)" 
+                    class="action-button"
+                    [class.cancel-button]="produto.ativo"
+                    [class.reactivate-button]="!produto.ativo">
+              <i class="fa-solid" [class.fa-times-circle]="produto.ativo" [class.fa-check-circle]="!produto.ativo"></i>
+              {{ produto.ativo ? 'Cancelar' : 'Reativar' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <ng-template #noResults>
+        <div class="state-container">
+            <p *ngIf="isLoading" class="loading-state">A carregar produtos...</p>
+            <p *ngIf="!isLoading && produtos.length === 0" class="empty-state">Nenhum produto encontrado com os filtros atuais.</p>
+        </div>
+    </ng-template>
+  </div>
+</div>

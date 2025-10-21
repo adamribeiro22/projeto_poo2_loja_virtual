@@ -3,6 +3,7 @@ using LojaVirtual.Application.DTO.Auth;
 using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Display;
 using LojaVirtual.Application.DTO.Query;
+using LojaVirtual.Application.DTO.Update;
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Filters;
 
@@ -19,6 +20,7 @@ namespace LojaVirtual.Application.Mapper
             CreateMap<ProdutoCreateDTO, Produto>();
             CreateMap<ProdutoQueryDTO, ProdutoFilter>();
             CreateMap<Produto, ProdutoDisplayDTO>();
+            CreateMap<ProdutoUpdateDTO, Produto>();
 
             CreateMap<VariacaoProdutoCreateDTO, VariacaoProduto>();
             CreateMap<VariacaoProdutoQueryDTO, VariacaoProdutoFilter>();

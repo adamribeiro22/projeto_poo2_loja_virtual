@@ -1,1 +1,19 @@
-<p>admin works!</p>
+<app-header [navLinks]="adminNavLinks" title="Admin Dashboard" titleLink="/admin"></app-header>
+
+<main class="admin-dashboard">
+
+  <div class="dashboard-item content-panel">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="dashboard-item graphic-item">
+    <h3>Vendas do Mês</h3>
+  </div>
+
+  <div class="dashboard-item graphic-item">
+    <h3>Top Produtos</h3>
+  </div>
+
+</main>
+
+<app-footer></app-footer>

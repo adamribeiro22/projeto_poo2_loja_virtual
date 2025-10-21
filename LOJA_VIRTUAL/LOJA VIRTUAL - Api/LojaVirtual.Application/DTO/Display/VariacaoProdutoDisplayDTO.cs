@@ -11,5 +11,7 @@
         public string? Cor { get; set; }
         public decimal Preco { get; set; }
         public bool Ativo { get; set; }
+
+        public EstoqueDisplayDTO Estoque { get; set; }
     }
 }

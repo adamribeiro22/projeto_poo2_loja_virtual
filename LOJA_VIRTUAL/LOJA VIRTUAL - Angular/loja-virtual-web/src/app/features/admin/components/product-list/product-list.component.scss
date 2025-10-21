@@ -1,0 +1,185 @@
+.product-list-container {
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+  }
+}
+
+.create-button {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+  }
+}
+
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  input,
+  select {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--input-background);
+    flex: 1 1 200px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 178, 252, 0.2);
+    }
+  }
+
+  .clear-button {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--text-light);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+
+    &:hover {
+      background-color: var(--background-muted);
+      border-color: var(--text-secondary);
+    }
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tbody tr:hover {
+      background-color: #f9f9f9; 
+    }
+  }
+}
+
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  
+  background-color: rgba(var(--error-color-rgb), 0.1);
+  color: var(--error-color);
+
+  &.active {
+    background-color: rgba(var(--success-color-rgb), 0.1);
+    color: var(--success-color);
+  }
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.actions-cell .action-button {
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  color: var(--text-on-primary);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    filter: brightness(0.92);
+  }
+}
+
+.actions-cell .edit-button {
+  background-color: var(--primary-color);
+}
+.actions-cell .cancel-button {
+  background-color: var(--warning-color);
+}
+.actions-cell .reactivate-button {
+  background-color: var(--success-color);
+}
+
+
+.state-container {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}

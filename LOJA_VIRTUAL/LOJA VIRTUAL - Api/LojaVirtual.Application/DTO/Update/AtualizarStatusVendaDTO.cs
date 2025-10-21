@@ -4,6 +4,6 @@ namespace LojaVirtual.Application.DTO.Update
 {
     public class AtualizarStatusVendaDTO
     {
-        public StatusVenda NovoStatus { get; set; }
+        public string NovoStatus { get; set; }
     }
 }

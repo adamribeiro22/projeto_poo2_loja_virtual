@@ -1,6 +1,7 @@
 ﻿using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Display;
 using LojaVirtual.Application.DTO.Query;
+using LojaVirtual.Application.DTO.Update;
 
 namespace LojaVirtual.Application.Abstraction
 {
@@ -12,7 +13,7 @@ namespace LojaVirtual.Application.Abstraction
         Task<ProdutoDisplayDTO?> GetByIdAsync(int id);
         Task<IEnumerable<ProdutoDisplayDTO>> GetAllAsync(ProdutoQueryDTO? query);
         Task<ProdutoDisplayDTO> CreateAsync(ProdutoCreateDTO criarProdutoDto);
-        Task UpdateAsync(int id, ProdutoCreateDTO atualizarProdutoDto);
+        Task UpdateAsync(int id, ProdutoUpdateDTO atualizarProdutoDto);
         Task DeleteAsync(int id);
         Task CancelAsync(int id);
     }

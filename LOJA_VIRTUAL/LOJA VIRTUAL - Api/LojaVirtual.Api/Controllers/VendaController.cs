@@ -3,13 +3,13 @@ using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Query;
 using LojaVirtual.Application.DTO.Update;
 using LojaVirtual.Application.Exception;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LojaVirtual.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    // [Authorize]
     public class VendasController : ControllerBase
     {
         private readonly IVendaService _vendaService;
@@ -21,7 +21,7 @@ namespace LojaVirtual.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll([FromQuery] VendaQueryDTO? query)
         {
             var vendas = await _vendaService.GetAllAsync(query);
@@ -67,7 +67,6 @@ namespace LojaVirtual.Api.Controllers
         }
 
         [HttpPatch("{id}/status")]
-        // [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
@@ -92,7 +91,7 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Cancel(int id)
         {
             try

@@ -3,6 +3,7 @@ using LojaVirtual.Application.Abstraction;
 using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Display;
 using LojaVirtual.Application.DTO.Query;
+using LojaVirtual.Application.DTO.Update;
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Filters;
 using LojaVirtual.Domain.Interfaces;
@@ -33,6 +34,18 @@ namespace LojaVirtual.Application.Service
             var produto = _mapper.Map<Produto>(criarProdutoDisplayDTO);
             AuditHelper.UpdateAuditFields(produto);
             produto.Ativo = true;
+
+            int index = 0;
+            foreach (var variacao in produto.Variacoes)
+            {
+                AuditHelper.UpdateAuditFields(variacao);
+                variacao.Ativo = true;
+                variacao.Estoque = new Estoque
+                {
+                    Quantidade = criarProdutoDisplayDTO.Variacoes.ElementAt(index).QuantidadeEstoqueInicial
+                };
+                index++;
+            }
 
             await _unitOfWork.ProdutoRepository.CreateAsync(produto);
             await _unitOfWork.CommitAsync();
@@ -74,12 +87,12 @@ namespace LojaVirtual.Application.Service
 
         public async Task<ProdutoDisplayDTO?> GetByIdAsync(int id)
         {
-            var produto = await _unitOfWork.ProdutoRepository.GetByIdAsync(id);
+            var produto = await _unitOfWork.ProdutoRepository.GetByIdWithVariationsAsync(id);
 
             return _mapper.Map<ProdutoDisplayDTO>(produto);
         }
 
-        public async Task UpdateAsync(int id, ProdutoCreateDTO atualizarProdutoDisplayDTO)
+        public async Task UpdateAsync(int id, ProdutoUpdateDTO atualizarProdutoDisplayDTO)
         {
             var produtoExistente = await _unitOfWork.ProdutoRepository.GetByIdAsync(id);
             if (produtoExistente != null)
@@ -100,7 +113,7 @@ namespace LojaVirtual.Application.Service
                 throw new KeyNotFoundException($"Produto com ID {id} não encontrado.");
             }
 
-            produto.Ativo = false;
+            produto.Ativo = !produto.Ativo;
             AuditHelper.UpdateAuditFields(produto);
 
             foreach (var variacao in produto.Variacoes)

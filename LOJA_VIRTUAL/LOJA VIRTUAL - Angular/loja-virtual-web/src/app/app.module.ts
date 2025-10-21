@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 
-// Ponto de entrada da aplicação, @NgModule diz ao Angular como compilar e executar a aplicação
 @NgModule({
   declarations: [
     AppComponent

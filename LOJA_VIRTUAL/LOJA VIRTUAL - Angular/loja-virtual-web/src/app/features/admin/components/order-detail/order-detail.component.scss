@@ -1,0 +1,118 @@
+.order-detail-container {
+  padding: 1.5rem;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.back-button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+  }
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+.details-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.detail-card {
+  background-color: var(--surface-color);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  text-align: left;
+
+  .icon {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  small {
+    display: block;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  strong {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+.total-card {
+  background-color: var(--success-color-light);
+  
+  .valor-total {
+    font-size: 1.2rem;
+    color: var(--success-color);
+  }
+}
+
+.status {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+  display: inline-block;
+
+  &.pendente { background-color: var(--warning-color); }
+  &.confirmada { background-color: var(--gray-color); }
+  &.enviada { background-color: var(--primary-color); }
+  &.entregue { background-color: var(--success-color); }
+  &.cancelada { background-color: var(--error-color); }
+}
+
+.items-table {
+  margin-top: 1.5rem;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 6px;
+    overflow: hidden;
+
+    thead {
+      background-color: var(--table-header-bg);
+      th {
+        font-weight: 600;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        color: var(--text-dark);
+      }
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--table-row-alt);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+  }
+}

@@ -95,8 +95,16 @@ namespace LojaVirtual.Application.Service
                 _mapper.Map(dto, variacaoExistente);
                 AuditHelper.UpdateAuditFields(variacaoExistente);
 
-                variacaoExistente.Estoque.Quantidade = dto.QuantidadeEstoqueInicial;
-                AuditHelper.UpdateAuditFields(variacaoExistente.Estoque);
+                if (variacaoExistente.Estoque != null)
+                {
+                    variacaoExistente.Estoque.Quantidade = dto.QuantidadeEstoqueInicial;
+                    AuditHelper.UpdateAuditFields(variacaoExistente.Estoque);
+                }
+                else
+                {
+                    variacaoExistente.Estoque = new Estoque { Quantidade = dto.QuantidadeEstoqueInicial };
+                    AuditHelper.UpdateAuditFields(variacaoExistente.Estoque);
+                }
 
                 _unitOfWork.VariacaoProdutoRepository.Update(variacaoExistente);
                 await _unitOfWork.CommitAsync();

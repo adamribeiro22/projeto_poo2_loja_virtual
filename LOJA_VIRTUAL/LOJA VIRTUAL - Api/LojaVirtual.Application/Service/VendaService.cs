@@ -71,7 +71,12 @@ namespace LojaVirtual.Application.Service
                 throw new InvalidOperationException("Não é possível alterar o status de uma venda que já foi entregue ou cancelada.");
             }
 
-            venda.Status = dto.NovoStatus;
+            if (!Enum.TryParse<StatusVenda>(dto.NovoStatus, true, out var novoStatus))
+            {
+                throw new ArgumentException($"O status '{dto.NovoStatus}' não é válido.");
+            }
+
+            venda.Status = novoStatus;
             AuditHelper.UpdateAuditFields(venda);
 
             _unitOfWork.VendaRepository.Update(venda);

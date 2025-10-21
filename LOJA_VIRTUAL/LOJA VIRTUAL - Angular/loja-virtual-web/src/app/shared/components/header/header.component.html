@@ -1,1 +1,18 @@
-<p>header works!</p>
+<header class="main-header">
+    <div class="logo">
+        <a [routerLink]="titleLink">{{ title }}</a>
+    </div>
+    <nav class="main-nav">
+        <ul>
+            <li *ngFor="let link of navLinks">
+                <a [routerLink]="link.path" routerLinkActive="active-link">{{ link.label }}</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="user-actions">
+        <button (click)="logout()" class="logout-button">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span class="logout-text">Sair</span>
+        </button>
+    </div>
+</header>

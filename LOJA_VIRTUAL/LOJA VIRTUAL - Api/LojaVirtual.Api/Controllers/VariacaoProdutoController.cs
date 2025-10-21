@@ -8,7 +8,7 @@ namespace LojaVirtual.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    // [Authorize]
+    [Authorize]
     public class VariacaoProdutosController : ControllerBase
     {
         private readonly IVariacaoProdutoService _variacaoProdutoService;
@@ -44,7 +44,7 @@ namespace LojaVirtual.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] VariacaoProdutoCreateDTO criarVariacaoProdutoDTO)
         {
             var novaVariacao = await _variacaoProdutoService.CreateAsync(criarVariacaoProdutoDTO);
@@ -56,7 +56,7 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, [FromBody] VariacaoProdutoCreateDTO atualizarVariacaoProdutoDTO)
         {
             var variacaoExistente = await _variacaoProdutoService.GetByIdAsync(id);
@@ -74,7 +74,7 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -95,7 +95,7 @@ namespace LojaVirtual.Api.Controllers
         [HttpPost("{id}/cancel")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Cancel(int id)
         {
             try

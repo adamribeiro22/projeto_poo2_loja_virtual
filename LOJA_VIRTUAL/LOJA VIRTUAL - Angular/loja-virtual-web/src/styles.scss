@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+  /* Paleta de Cores Principal */
+  --primary-color: #008FD6;
+  --primary-color-dark: #006CB0;
+  --primary-color-light: #81aedf;
+  --accent-color: #00B2FC;
+  --gray-color: #6d6c6c;
+
+  /* Cores de Fundo */
+  --background-color: #f4f7f6;
+  --card-background: #FFFFFF;
+
+  /* Cores de Texto */
+  --text-color: #2c3e50;
+  --text-light: #888;
+  --text-on-primary: #FFFFFF;
+  --text-secondary: #6c757d;
+  --background-muted: #f8f9fa;
+
+  /* Cores de Feedback */
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+  --warning-color: #f39c12;
+  --status-pendente: #F1C40F;
+  --status-confirmado: #27AE60;
+  --status-enviado: #2980B9;
+  --status-entregue: #95A5A6;
+  --status-cancelado: #E74C3C;
+
+  /* Cores de Bordas e Divisórias */
+  --border-color: #ddd;
+  --border-focus-color: var(--accent-color);
+
+  /* Botões de Ação */
+  --btn-confirmar: #2ECC71;
+  --btn-enviar: #3498DB;
+  --btn-entregar: #888888;
+  --btn-cancelar: #E74C3C;
+  --btn-detalhes: #AAB7B8;
+
+  /* Botões de Ação Hover*/
+  --btn-confirmar-010: #27B765;
+  --btn-enviar-010: #2E86C1;
+  --btn-entregar-010: #777777;
+  --btn-cancelar-010: #C0392B;
+  --btn-detalhes-010: #95A5A6;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+* {
+  box-sizing: border-box;
+}

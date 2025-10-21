@@ -1,0 +1,26 @@
+.admin-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  min-height: calc(100vh - 70px - 60px);
+}
+
+.dashboard-item {
+  background-color: var(--card-background);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.content-panel {
+  flex-basis: 100%;
+  order: 1;
+}
+
+.graphic-item {
+  flex-grow: 1;
+  order: 2;
+  text-align: center;
+  min-height: 200px;
+}

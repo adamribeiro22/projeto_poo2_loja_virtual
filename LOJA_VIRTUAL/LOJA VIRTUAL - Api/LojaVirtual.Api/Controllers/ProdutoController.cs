@@ -1,6 +1,7 @@
 ﻿using LojaVirtual.Application.Abstraction;
 using LojaVirtual.Application.DTO.Creation;
 using LojaVirtual.Application.DTO.Query;
+using LojaVirtual.Application.DTO.Update;
 using LojaVirtual.Application.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace LojaVirtual.Api.Controllers
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
-    // [Authorize]
+    [Authorize]
     public class ProdutosController : ControllerBase
     {
         private readonly IProdutoService _produtoService;
@@ -50,7 +51,7 @@ namespace LojaVirtual.Api.Controllers
         [HttpPost] // método http Post nesse caso
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] ProdutoCreateDTO criarProdutoDTO) // FromBody indica que o objeto será recebido no corpo da requisição, como JSON por exemplo
         {
             var novoProduto = await _produtoService.CreateAsync(criarProdutoDTO);
@@ -62,8 +63,8 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        // [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Update(int id, [FromBody] ProdutoCreateDTO atualizarProdutoDTO)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Update(int id, [FromBody] ProdutoUpdateDTO atualizarProdutoDTO)
         {
             var produtoExistente = await _produtoService.GetByIdAsync(id);
             if (produtoExistente == null)
@@ -80,7 +81,7 @@ namespace LojaVirtual.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -101,7 +102,7 @@ namespace LojaVirtual.Api.Controllers
         [HttpPost("{id}/cancel")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Cancel(int id)
         {
             try

@@ -40,6 +40,7 @@ namespace LojaVirtual.Infrastructure.Persistence.Repositories
         {
             return await _context.Produtos
                                  .Include(p => p.Variacoes)
+                                    .ThenInclude(vp => vp.Estoque)
                                  .FirstOrDefaultAsync(p => p.Id == id);
         }
 
