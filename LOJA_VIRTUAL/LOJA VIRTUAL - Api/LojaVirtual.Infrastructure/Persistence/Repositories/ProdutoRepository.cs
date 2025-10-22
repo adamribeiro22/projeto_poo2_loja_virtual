@@ -49,5 +49,14 @@ namespace LojaVirtual.Infrastructure.Persistence.Repositories
             return await _context.ItensVenda
                          .AnyAsync(item => item.VariacaoProduto.ProdutoId == produtoId);
         }
+
+        public async Task<IEnumerable<Produto>> GetAllWithDetailsAsync()
+        {
+            return await _context.Produtos
+                .Include(p => p.Variacoes)
+                    .ThenInclude(v => v.Estoque)
+                .Where(p => p.Ativo)
+                .ToListAsync();
+        }
     }
 }

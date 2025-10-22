@@ -13,5 +13,6 @@ namespace LojaVirtual.Domain.Interfaces
         Task<IEnumerable<Produto>> GetWithFiltersAsync(ProdutoFilter query);
         Task<Produto?> GetByIdWithVariationsAsync(int id);
         Task<bool> HasAssociatedSalesAsync(int produtoId);
+        Task<IEnumerable<Produto>> GetAllWithDetailsAsync();
     }
 }

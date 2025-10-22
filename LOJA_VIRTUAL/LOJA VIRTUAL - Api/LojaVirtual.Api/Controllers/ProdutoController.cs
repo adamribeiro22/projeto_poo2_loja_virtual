@@ -33,6 +33,14 @@ namespace LojaVirtual.Api.Controllers
             return Ok(produtos); // retorna status code de 200, o Ok
         }
 
+        [HttpGet("details")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllWithDetails([FromQuery] ProdutoQueryDTO? query)
+        {
+            var produtos = await _produtoService.GetAllAsyncWithDetails(query);
+            return Ok(produtos);
+        }
+
         [HttpGet("{id}")] // novamente método HTTP, mas que recebe um id
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

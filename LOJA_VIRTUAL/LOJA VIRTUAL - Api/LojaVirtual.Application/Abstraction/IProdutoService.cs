@@ -12,6 +12,7 @@ namespace LojaVirtual.Application.Abstraction
     {
         Task<ProdutoDisplayDTO?> GetByIdAsync(int id);
         Task<IEnumerable<ProdutoDisplayDTO>> GetAllAsync(ProdutoQueryDTO? query);
+        Task<IEnumerable<ProdutoDisplayDTO>> GetAllAsyncWithDetails(ProdutoQueryDTO? query);
         Task<ProdutoDisplayDTO> CreateAsync(ProdutoCreateDTO criarProdutoDto);
         Task UpdateAsync(int id, ProdutoUpdateDTO atualizarProdutoDto);
         Task DeleteAsync(int id);

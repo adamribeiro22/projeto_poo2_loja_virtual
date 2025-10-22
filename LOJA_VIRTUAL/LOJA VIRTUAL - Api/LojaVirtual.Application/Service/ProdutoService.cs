@@ -85,6 +85,29 @@ namespace LojaVirtual.Application.Service
             return _mapper.Map<IEnumerable<ProdutoDisplayDTO>>(produtosFiltrados);
         }
 
+        public async Task<IEnumerable<ProdutoDisplayDTO>> GetAllAsyncWithDetails(ProdutoQueryDTO? query)
+        {
+            var produtosComDetalhes = await _unitOfWork.ProdutoRepository.GetAllWithDetailsAsync();
+
+            if (query != null)
+            {
+                if (!string.IsNullOrWhiteSpace(query.Nome))
+                {
+                    produtosComDetalhes = produtosComDetalhes.Where(p => p.Nome.Contains(query.Nome, StringComparison.OrdinalIgnoreCase));
+                }
+                if (!string.IsNullOrWhiteSpace(query.Categoria))
+                {
+                    produtosComDetalhes = produtosComDetalhes.Where(p => p.Categoria != null && p.Categoria.Equals(query.Categoria, StringComparison.OrdinalIgnoreCase));
+                }
+                if (query.Ativo.HasValue)
+                {
+                    produtosComDetalhes = produtosComDetalhes.Where(p => p.Ativo == query.Ativo.Value);
+                }
+            }
+
+            return _mapper.Map<IEnumerable<ProdutoDisplayDTO>>(produtosComDetalhes);
+        }
+
         public async Task<ProdutoDisplayDTO?> GetByIdAsync(int id)
         {
             var produto = await _unitOfWork.ProdutoRepository.GetByIdWithVariationsAsync(id);
