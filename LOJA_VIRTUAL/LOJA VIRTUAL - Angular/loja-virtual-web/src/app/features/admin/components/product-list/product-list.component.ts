@@ -13,8 +13,14 @@ import { Produto } from '../../../../core/models/produto.model';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   
-  produtos: Produto[] = [];
   filtroForm!: FormGroup;
+
+  private todosOsProdutos: Produto[] = [];
+  produtosDaPagina: Produto[] = [];
+
+  currentPage = 1;
+  pageSize = 10;
+  totalCount = 0;
 
   isLoading = false;
   private destroy$ = new Subject<void>();
@@ -33,22 +39,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
       ativo: [null]
     });
 
-    this.refreshTrigger$.pipe(
-      tap(() => this.isLoading = true),
-      switchMap(() => this.adminService.getProdutos(this.filtroForm.value)),
+    this.filtroForm.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(filtros => {
+        this.isLoading = true;
+        return this.adminService.getProdutos(filtros);
+      }),
       takeUntil(this.destroy$)
-    ).subscribe(result => {
-      this.produtos = result;
+    ).subscribe(produtos => {
+      this.todosOsProdutos = produtos;
+      this.totalCount = produtos.length;
+      this.currentPage = 1;
+      this.atualizarPaginaExibida();
       this.isLoading = false;
     });
 
-    this.filtroForm.valueChanges.pipe(
-      debounceTime(400),
-      distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-      takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.refreshTrigger$.next();
-    });
+    this.carregarProdutos();
   }
 
   ngOnDestroy(): void {
@@ -56,12 +63,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  limparFiltros(): void {
-    this.filtroForm.reset({
-      nome: '',
-      categoria: '',
-      ativo: null
-    });
+  carregarProdutos(): void {
+    this.filtroForm.patchValue(this.filtroForm.value);
+  }
+
+  atualizarPaginaExibida(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.produtosDaPagina = this.todosOsProdutos.slice(startIndex, endIndex);
   }
 
   editarProduto(id: number): void {
@@ -78,7 +87,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
       : this.adminService.reactivateProduto(id);
       
     action$.subscribe(() => {
-        this.refreshTrigger$.next();
+        this.carregarProdutos();
     });
+  }
+
+  limparFiltros(): void {
+    this.filtroForm.reset({ ativo: null });
+  }
+  
+  get totalPages(): number {
+    return Math.ceil(this.totalCount / this.pageSize);
+  }
+
+  mudarPagina(novaPagina: number): void {
+    if (novaPagina > 0 && novaPagina <= this.totalPages) {
+      this.currentPage = novaPagina;
+      this.atualizarPaginaExibida();
+    }
   }
 }

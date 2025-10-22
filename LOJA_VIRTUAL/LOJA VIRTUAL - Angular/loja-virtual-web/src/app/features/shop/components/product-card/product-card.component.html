@@ -1,1 +1,46 @@
-<p>product-card works!</p>
+<div class="product-card" *ngIf="produto">
+
+  <img src="../../../../../assets/carrinho.jpg" 
+       [alt]="produto.nome" 
+       class="card-image">
+
+  <div class="card-content">
+    <h3 class="card-title">{{ produto.nome }}</h3>
+    <p class="card-description">{{ produto.descricao }}</p>
+  </div>
+  
+  <div class="card-actions">
+    <ng-container *ngIf="produto.variacoes && produto.variacoes.length > 0; else noVariations">
+      <form [formGroup]="selecaoForm" (ngSubmit)="adicionarAoCarrinho()">
+        <div class="variation-selector">
+          <select formControlName="variacaoId">
+            <option [ngValue]="null" disabled>Selecione uma variação</option>
+            <option *ngFor="let v of produto.variacoes" 
+                    [ngValue]="v.id" 
+                    [disabled]="!v.ativo || v.estoque?.quantidade === 0">
+              {{ v.tamanho }} / {{ v.cor }} 
+              <span *ngIf="v.estoque?.quantidade === 0"> (Sem estoque)</span>
+            </option>
+          </select>
+        </div>
+
+        <div class="quantity-selector" *ngIf="variacaoSelecionada">
+          <input type="number" formControlName="quantidade" min="1" [max]="maxQuantidadePermitida">
+        </div>
+
+        <div class="stock-info" *ngIf="variacaoSelecionada">
+          <span>Preço: {{ variacaoSelecionada.preco | currency:'BRL' }}</span>
+        </div>
+
+        <button type="submit" [disabled]="selecaoForm.invalid || !estoqueDisponivel" class="add-to-cart-button">
+          {{ estoqueDisponivel ? 'Adicionar ao Carrinho' : 'Estoque Esgotado' }}
+        </button>
+      </form>
+    </ng-container>
+
+    <ng-template #noVariations>
+      <button class="add-to-cart-button" disabled>Produto Indisponível</button>
+    </ng-template>
+
+  </div>
+</div>

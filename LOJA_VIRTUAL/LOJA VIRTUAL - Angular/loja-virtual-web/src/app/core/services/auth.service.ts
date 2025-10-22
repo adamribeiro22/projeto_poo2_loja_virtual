@@ -30,6 +30,7 @@ export class AuthService {
   }
 
   register(dadosRegistro: any): Observable<AuthResponse> {
+    console.log(this.apiUrl + "/register");
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, dadosRegistro).pipe(
       tap(response => {
         if (response.sucesso && response.token && response.usuario) {

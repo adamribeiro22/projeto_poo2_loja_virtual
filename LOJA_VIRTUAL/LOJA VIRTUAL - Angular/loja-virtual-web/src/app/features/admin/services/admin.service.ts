@@ -7,6 +7,7 @@ import { Venda } from '../../../core/models/venda.model';
 import { StatusVenda  } from '../../../core/models/status-venda.enum';
 import { Produto, ProdutoCreateDTO, VariacaoProdutoCreateDTO } from '../../../core/models/produto.model';
 import { ProdutoQuery } from '../../../core/models/produto-query.model';
+import { VendaCreateDTO } from '../../../core/models/venda-create.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class AdminService {
     return this.http.get<any[]>(`${this.apiUrl}/api/Vendas`, { params }).pipe(
       map(vendasApi => vendasApi.map(venda => this.mapVendaApiToModel(venda)))
     );
+  }
+
+  createVenda(vendaData: VendaCreateDTO): Observable<Venda> {
+    return this.http.post<Venda>(`${this.apiUrl}/api/Vendas`, vendaData);
   }
 
   getVendaById(id: number): Observable<Venda> {

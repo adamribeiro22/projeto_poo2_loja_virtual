@@ -1,19 +1,14 @@
-<app-header [navLinks]="adminNavLinks" title="Admin Dashboard" titleLink="/admin"></app-header>
+<div class="admin-layout">
+  <app-header 
+    [title]="'Admin Dashboard'" 
+    [titleLink]="'/admin'"
+    [navLinks]="[
+      { path: 'pedidos', label: 'Pedidos' },
+      { path: 'produtos', label: 'Produtos' }
+    ]">
+  </app-header>
 
-<main class="admin-dashboard">
-
-  <div class="dashboard-item content-panel">
+  <main class="admin-content">
     <router-outlet></router-outlet>
-  </div>
-
-  <div class="dashboard-item graphic-item">
-    <h3>Vendas do Mês</h3>
-  </div>
-
-  <div class="dashboard-item graphic-item">
-    <h3>Top Produtos</h3>
-  </div>
-
-</main>
-
-<app-footer></app-footer>
+  </main>
+</div>

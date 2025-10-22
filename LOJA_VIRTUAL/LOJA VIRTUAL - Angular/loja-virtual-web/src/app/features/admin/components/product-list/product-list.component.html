@@ -21,7 +21,7 @@
   </div>
 
   <div class="table-wrapper">
-    <table *ngIf="!isLoading && produtos.length > 0; else noResults">
+    <table *ngIf="!isLoading && produtosDaPagina.length > 0; else noResults">
       <thead>
         <tr>
           <th>ID</th>
@@ -32,7 +32,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let produto of produtos">
+        <tr *ngFor="let produto of produtosDaPagina">
           <td>#{{ produto.id }}</td>
           <td>{{ produto.nome }}</td>
           <td>{{ produto.categoria || 'N/A' }}</td>
@@ -60,8 +60,14 @@
     <ng-template #noResults>
         <div class="state-container">
             <p *ngIf="isLoading" class="loading-state">A carregar produtos...</p>
-            <p *ngIf="!isLoading && produtos.length === 0" class="empty-state">Nenhum produto encontrado com os filtros atuais.</p>
+            <p *ngIf="!isLoading && produtosDaPagina.length === 0" class="empty-state">Nenhum produto encontrado com os filtros atuais.</p>
         </div>
     </ng-template>
+  </div>
+  
+  <div class="pagination-container" *ngIf="totalCount > pageSize">
+      <button (click)="mudarPagina(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button (click)="mudarPagina(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
   </div>
 </div>

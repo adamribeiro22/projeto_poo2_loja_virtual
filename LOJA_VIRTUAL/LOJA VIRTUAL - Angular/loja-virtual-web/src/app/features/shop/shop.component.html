@@ -1,1 +1,11 @@
-<!--<app-header [navLinks]="shopNavLinks" title="Loja Virtual" titleLink="/shop"></app-header>-->
+<app-header 
+  [title]="'Loja Virtual'" 
+  [titleLink]="'/shop'"
+  [navLinks]="[
+    { path: '/shop', label: 'Home' }
+  ]">
+</app-header>
+
+<main class="shop-content">
+  <router-outlet></router-outlet>
+</main>

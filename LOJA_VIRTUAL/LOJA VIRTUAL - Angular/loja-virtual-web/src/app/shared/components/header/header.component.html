@@ -9,10 +9,14 @@
             </li>
         </ul>
     </nav>
-    <div class="user-actions">
-        <button (click)="logout()" class="logout-button">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <span class="logout-text">Sair</span>
+    <div class="header-actions">
+        <a *ngIf="usuarioAtual$ | async" routerLink="/shop/carrinho" class="cart-link">
+            <i class="fa-solid fa-shopping-cart"></i>
+            <span *ngIf="(totalItensCarrinho$ | async) as total" class="cart-badge">{{ total }}</span>
+        </a>
+        <button (click)="logout()" class="logout-button" *ngIf="usuarioAtual$ | async">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="logout-text">Sair</span>
         </button>
     </div>
 </header>

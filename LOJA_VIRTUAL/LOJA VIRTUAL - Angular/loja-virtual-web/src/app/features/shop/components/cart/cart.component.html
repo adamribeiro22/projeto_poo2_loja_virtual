@@ -1,1 +1,56 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <h2>Seu Carrinho de Compras</h2>
+
+  <div *ngIf="(cart$ | async) as cart">
+    <div *ngIf="cart.itens.length > 0; else emptyCart">
+      
+      <div class="cart-summary">
+        <h3>Resumo</h3>
+        <p>Total de Itens: <strong>{{ cart.totalItens }}</strong></p>
+        <p>Valor Total: <strong>{{ cart.valorTotal | currency:'BRL' }}</strong></p>
+      </div>
+
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unit.</th>
+            <th>Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart.itens">
+            <td>
+              <strong>{{ item.produto.nome }}</strong><br>
+              <small>{{ item.variacao.tamanho }} / {{ item.variacao.cor }}</small>
+            </td>
+            <td>{{ item.quantidade }}</td>
+            <td>{{ item.variacao.preco | currency:'BRL' }}</td>
+            <td>{{ (item.quantidade * item.variacao.preco) | currency:'BRL' }}</td>
+            <td>
+              <button (click)="removerItem(item.variacao.id)" class="remove-button">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checkout-actions">
+        <button (click)="finalizarCompra()" class="checkout-button">
+          Finalizar Compra
+        </button>
+      </div>
+
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="empty-cart-message">
+        <p>Seu carrinho está vazio.</p>
+        <a routerLink="/shop" class="continue-shopping">Continuar a comprar</a>
+      </div>
+    </ng-template>
+  </div>
+</div>

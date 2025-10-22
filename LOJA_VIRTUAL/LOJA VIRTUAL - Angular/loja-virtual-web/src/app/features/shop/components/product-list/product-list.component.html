@@ -1,1 +1,30 @@
-<p>product-list works!</p>
+<div class="product-list-container">
+  <h1><i class="fa-solid fa-store"></i> Nossos Produtos</h1>
+  
+  <div *ngIf="!isLoading; else loadingTemplate">
+    <div class="product-grid" *ngIf="produtosDaPagina.length > 0; else noProductsTemplate">
+      <app-product-card 
+        *ngFor="let produto of produtosDaPagina" 
+        [produto]="produto">
+      </app-product-card>
+    </div>
+  </div>
+
+  <div class="pagination-container" *ngIf="!isLoading && totalCount > pageSize">
+      <button (click)="mudarPagina(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button (click)="mudarPagina(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="state-container">
+      <p>A carregar produtos...</p>
+    </div>
+  </ng-template>
+
+  <ng-template #noProductsTemplate>
+    <div class="state-container">
+      <p>Nenhum produto disponível no momento.</p>
+    </div>
+  </ng-template>
+</div>

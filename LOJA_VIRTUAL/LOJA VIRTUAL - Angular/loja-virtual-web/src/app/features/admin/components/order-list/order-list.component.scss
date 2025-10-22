@@ -19,57 +19,96 @@
   }
 }
 
-.table-wrapper {
-  overflow-x: auto;
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
   background-color: var(--card-background);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-
-    th,
-    td {
-      padding: 1.25rem 1.5rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border-color);
-      vertical-align: middle;
-    }
-
-    th {
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-light);
-    }
-
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
-    
-    tbody tr:hover {
-      background-color: var(--background-muted);
-    }
-  }
 }
 
-.status {
-  padding: 0.3rem 0.8rem;
-  border-radius: 16px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: white;
-  text-transform: capitalize;
-  display: inline-block;
-  min-width: 90px;
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 160px;
 
-  &.pendente { background-color: var(--status-pendente); }
-  &.confirmada { background-color: var(--status-confirmado); }
-  &.enviada { background-color: var(--status-enviado); }
-  &.entregue { background-color: var(--status-entregue); }
-  &.cancelada { background-color: var(--status-cancelado); }
+    label {
+        font-weight: 500;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-left: 0.2rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1rem;
+        background-color: var(--input-background);
+
+        &:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 178, 252, 0.2);
+        }
+    }
+}
+
+.action-group {
+    height: 100%;
+
+    .clear-button {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        &:hover {
+            background-color: var(--background-muted);
+            border-color: var(--text-secondary);
+        }
+    }
+}
+
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+  }
+
+  thead th {
+    font-weight: 600;
+    color: var(--text-light);
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
 }
 
 .actions-cell {
@@ -77,37 +116,32 @@
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
 
-  .action-button {
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    color: var(--text-on-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+.action-button {
+  border: none;
+  padding: 0.5rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  color: var(--text-on-primary);
 
-    &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      filter: brightness(0.92);
-    }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
 }
 
-.view-button {
-  background-color: var(--btn-detalhes);
-}
-
-.confirm-button {
-  background-color: var(--btn-confirmar);
-}
-
+.view-button { background-color: var(--btn-detalhes); }
+.confirm-button { background-color: var(--btn-confirmar); }
 .ship-button {
   background-color: var(--btn-enviar);
-
   position: relative;
   overflow: hidden;
 
@@ -117,13 +151,23 @@
     transition: transform 1s ease-in-out;
   }
 
-  &.animar i {
-    transform: translateX(210%);
-  }
+  &.animar i { transform: translateX(210%); }
 }
+.deliver-button { background-color: var(--btn-entregar); }
 
-.deliver-button {
-  background-color: var(--btn-entregar);
+.status {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+
+  &.pendente { background-color: var(--status-pendente); }
+  &.confirmada { background-color: var(--status-confirmado); }
+  &.enviada { background-color: var(--status-enviado); }
+  &.entregue { background-color: var(--status-entregue); }
+  &.cancelada { background-color: var(--status-cancelado); }
 }
 
 .state-container {
@@ -134,4 +178,35 @@
   text-align: center;
   color: var(--text-secondary);
   font-size: 1.1rem;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  span {
+    font-weight: 500;
+  }
+
+  button {
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-color-dark);
+    }
+
+    &:disabled {
+      background-color: var(--primary-color-light);
+      cursor: not-allowed;
+    }
+  }
 }

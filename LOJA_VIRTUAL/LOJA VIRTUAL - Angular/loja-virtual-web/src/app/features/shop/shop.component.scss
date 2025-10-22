@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  background-color: var(--background-light);
+  min-height: 100%;
+}
+
+.shop-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
