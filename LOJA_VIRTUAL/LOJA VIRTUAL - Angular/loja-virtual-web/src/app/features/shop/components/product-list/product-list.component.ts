@@ -2,7 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ProductService } from '../../services/product.service';
-import { Produto } from '../../../../core/models/produto.model';
+import { Produto, VariacaoProduto } from '../../../../core/models/produto.model';
+
+interface ItemExibicao {
+  produto: Produto;
+  variacao: VariacaoProduto;
+}
 
 @Component({
   selector: 'app-product-list',
@@ -12,8 +17,8 @@ import { Produto } from '../../../../core/models/produto.model';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   
-  private todosOsProdutos: Produto[] = [];
-  produtosDaPagina: Produto[] = [];
+  private todosOsItens: ItemExibicao[] = [];
+  itensDaPagina: ItemExibicao[] = [];
   isLoading = true;
 
   currentPage = 1;
@@ -29,8 +34,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (produtos) => {
-          this.todosOsProdutos = produtos;
-          this.totalCount = produtos.length;
+          this.todosOsItens = this.mapearProdutosParaItens(produtos);
+          this.totalCount = this.todosOsItens.length;
           this.atualizarPaginaExibida();
           this.isLoading = false;
         },
@@ -41,6 +46,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
       });
   }
 
+  private mapearProdutosParaItens(produtos: Produto[]): ItemExibicao[] {
+    return produtos.flatMap(produto => 
+      produto.variacoes
+        .filter(v => v.ativo)
+        .map(variacao => ({
+          produto: produto,
+          variacao: variacao
+        }))
+    );
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -49,7 +65,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   atualizarPaginaExibida(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    this.produtosDaPagina = this.todosOsProdutos.slice(startIndex, endIndex);
+    this.itensDaPagina = this.todosOsItens.slice(startIndex, endIndex);
   }
 
   get totalPages(): number {

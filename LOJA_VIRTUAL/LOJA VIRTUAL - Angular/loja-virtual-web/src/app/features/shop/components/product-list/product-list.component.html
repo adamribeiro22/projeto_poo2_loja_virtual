@@ -2,10 +2,11 @@
   <h1><i class="fa-solid fa-store"></i> Nossos Produtos</h1>
   
   <div *ngIf="!isLoading; else loadingTemplate">
-    <div class="product-grid" *ngIf="produtosDaPagina.length > 0; else noProductsTemplate">
+    <div class="product-grid" *ngIf="itensDaPagina.length > 0; else noProductsTemplate">
       <app-product-card 
-        *ngFor="let produto of produtosDaPagina" 
-        [produto]="produto">
+        *ngFor="let item of itensDaPagina" 
+        [produto]="item.produto"
+        [variacao]="item.variacao">
       </app-product-card>
     </div>
   </div>

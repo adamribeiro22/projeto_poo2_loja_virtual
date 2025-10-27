@@ -9,9 +9,15 @@ export const authGuard: CanActivateFn = (route, state) => {
   
   return authService.usuarioAtual$.pipe(
     take(1), map(usuario => {
-      if(usuario){
+      if(usuario && usuario.tipo === 'Comum'){
         return true;
       }
+      
+      if(usuario && usuario.tipo === 'Admin'){
+        router.navigate(['/admin'])
+        return false;
+      }
+
       router.navigate(['/auth/login'])
       return false;
     })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
 import { finalize } from 'rxjs';
 
@@ -20,19 +20,56 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(8)]]
+      senha: ['', [Validators.required, Validators.minLength(8)]],
+      confirmarSenha: ['', [Validators.required]]
+    }, {
+      validators: this.passwordMatchValidator  
     });
+  }
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const senha = control.get('senha');
+    const confirmarSenha = control.get('confirmarSenha');
+
+    if (!senha || !confirmarSenha) {
+      return null;
+    }
+    
+    if (confirmarSenha.pristine) {
+        return null;
+    }
+
+    if (senha.value === confirmarSenha.value) {
+      if (confirmarSenha.hasError('mismatch')) {
+          const errors = confirmarSenha.errors;
+          if (errors) {
+              delete errors['mismatch'];
+              if (Object.keys(errors).length === 0) {
+                  confirmarSenha.setErrors(null);
+              } else {
+                  confirmarSenha.setErrors(errors);
+              }
+          }
+      }
+      return null;
+    } else {
+      confirmarSenha.setErrors({ ...confirmarSenha.errors, mismatch: true });
+      return { mismatch: true }; 
+    }
   }
 
   onSubmit(): void {
     if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched(); 
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = null;
-
-    this.authService.register(this.registerForm.value).pipe(
+    
+    const { confirmarSenha, ...formData } = this.registerForm.value;
+    console.log(formData);
+    this.authService.register(formData).pipe(
       finalize(() => this.isLoading = false)
     ).subscribe({
       next: (response) => {

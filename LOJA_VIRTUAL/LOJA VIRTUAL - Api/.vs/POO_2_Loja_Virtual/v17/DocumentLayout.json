@@ -1,0 +1,49 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4E8E1E3D-3647-4B83-BC53-5D65B6588A5B}|LojaVirtual.Api\\LojaVirtual.Api.csproj|c:\\projetos\\poo\\projeto_poo2_loja_virtual\\loja_virtual\\loja virtual - api\\lojavirtual.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E8E1E3D-3647-4B83-BC53-5D65B6588A5B}|LojaVirtual.Api\\LojaVirtual.Api.csproj|solutionrelative:lojavirtual.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "LojaVirtual.Api\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "LojaVirtual.Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T23:35:41.16Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

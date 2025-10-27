@@ -13,10 +13,13 @@ export const adminGuard: CanActivateFn = (route, state) => {
         return true;
       }
 
-      router.navigate(['/shop']);
+      if(usuario && usuario.tipo === 'Comum'){
+        router.navigate(['/shop']);
+        return false;
+      }
+
+      router.navigate(['/auth/login']);
       return false;
     })
   )
-
-  return true;
 };

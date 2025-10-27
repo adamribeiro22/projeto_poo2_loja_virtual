@@ -38,7 +38,7 @@
           <td>{{ produto.categoria || 'N/A' }}</td>
           <td>
             <span class="status" [class.active]="produto.ativo">
-              {{ produto.ativo ? 'Ativo' : 'Inativo' }}
+              {{ produto.ativo ? 'Ativo' : 'Desativo' }}
             </span>
           </td>
           <td class="actions-cell">
@@ -50,7 +50,7 @@
                     [class.cancel-button]="produto.ativo"
                     [class.reactivate-button]="!produto.ativo">
               <i class="fa-solid" [class.fa-times-circle]="produto.ativo" [class.fa-check-circle]="!produto.ativo"></i>
-              {{ produto.ativo ? 'Cancelar' : 'Reativar' }}
+              {{ produto.ativo ? 'Desativar' : 'Ativar' }}
             </button>
           </td>
         </tr>

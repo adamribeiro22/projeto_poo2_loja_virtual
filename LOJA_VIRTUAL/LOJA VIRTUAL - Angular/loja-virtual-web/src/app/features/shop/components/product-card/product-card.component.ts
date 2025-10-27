@@ -13,33 +13,27 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ProductCardComponent implements OnInit, OnDestroy {
   @Input() produto!: Produto;
+  @Input() variacao!: VariacaoProduto; 
   
   selecaoForm: FormGroup;
-  variacaoSelecionada: VariacaoProduto | null = null;
   maxQuantidadePermitida = 1;
 
   private destroy$ = new Subject<void>();
   
   constructor(private fb: FormBuilder, private cartService: CartService) {
     this.selecaoForm = this.fb.group({
-      variacaoId: [null, Validators.required],
       quantidade: [1, [Validators.required, Validators.min(1)]]
     });
   }
 
   ngOnInit(): void {
-    this.selecaoForm.get('variacaoId')?.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(id => {
-        this.variacaoSelecionada = this.produto.variacoes.find(v => v.id === +id) || null;
-        this.atualizarMaxQuantidade();
-    });
+    this.atualizarMaxQuantidade();
 
     this.cartService.cart$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.atualizarMaxQuantidade();
-    });
+      });
   }
 
   ngOnDestroy(): void {
@@ -48,12 +42,12 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
   
   private atualizarMaxQuantidade(): void {
-    if (!this.variacaoSelecionada || !this.variacaoSelecionada.estoque) {
+    if (!this.variacao || !this.variacao.estoque) {
       this.maxQuantidadePermitida = 0;
     } else {
-      const itemNoCarrinho = this.cartService.getItemAtualDoCarrinho(this.variacaoSelecionada.id);
+      const itemNoCarrinho = this.cartService.getItemAtualDoCarrinho(this.variacao.id);
       const quantidadeNoCarrinho = itemNoCarrinho ? itemNoCarrinho.quantidade : 0;
-      this.maxQuantidadePermitida = this.variacaoSelecionada.estoque.quantidade - quantidadeNoCarrinho;
+      this.maxQuantidadePermitida = this.variacao.estoque.quantidade - quantidadeNoCarrinho;
     }
     
     this.selecaoForm.get('quantidade')?.setValidators([
@@ -65,12 +59,12 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   adicionarAoCarrinho(): void {
-    if (this.selecaoForm.invalid || !this.variacaoSelecionada) {
+    if (this.selecaoForm.invalid) {
       return;
     }
     
     const { quantidade } = this.selecaoForm.value;
-    this.cartService.adicionarAoCarrinho(this.produto, this.variacaoSelecionada, quantidade);
+    this.cartService.adicionarAoCarrinho(this.produto, this.variacao, quantidade);
   }
   
   get estoqueDisponivel(): boolean {

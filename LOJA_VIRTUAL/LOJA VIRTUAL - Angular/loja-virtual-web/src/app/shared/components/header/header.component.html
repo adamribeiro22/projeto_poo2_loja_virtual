@@ -10,7 +10,7 @@
         </ul>
     </nav>
     <div class="header-actions">
-        <a *ngIf="usuarioAtual$ | async" routerLink="/shop/carrinho" class="cart-link">
+        <a *ngIf="showCart$ | async" routerLink="/shop/carrinho" class="cart-link">
             <i class="fa-solid fa-shopping-cart"></i>
             <span *ngIf="(totalItensCarrinho$ | async) as total" class="cart-badge">{{ total }}</span>
         </a>
