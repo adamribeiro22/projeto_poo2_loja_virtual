@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\35c3859d-a144-4c00-b5d8-a340b17cef9a.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\35c3859d-a144-4c00-b5d8-a340b17cef9a.png"
+    },
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\53469bca-1b3c-40e7-8d7d-3666a6d10453.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\53469bca-1b3c-40e7-8d7d-3666a6d10453.png"
+    },
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\88409f08-44b7-42ee-b457-fbb5b275b702.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\88409f08-44b7-42ee-b457-fbb5b275b702.png"
+    },
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\b017ff5b-10bf-4a11-9a96-7329568efef1.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\b017ff5b-10bf-4a11-9a96-7329568efef1.png"
+    },
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\c001b3a4-8bbb-4bd8-a7bb-3dd9079ff5a6.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\c001b3a4-8bbb-4bd8-a7bb-3dd9079ff5a6.png"
+    },
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\c951d542-ee56-4b2b-b260-bdf8fe14cda8.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\c951d542-ee56-4b2b-b260-bdf8fe14cda8.png"
+    },
+    {
+      "Id": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\wwwroot\\images\\variacoes\\e1129e43-9667-4648-a34b-fc98beea19da.png",
+      "PackagePath": "staticwebassets\\images\\variacoes\\e1129e43-9667-4648-a34b-fc98beea19da.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LojaVirtual.Api.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LojaVirtual.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.LojaVirtual.Api.props",
+      "PackagePath": "build\\LojaVirtual.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.LojaVirtual.Api.props",
+      "PackagePath": "buildMultiTargeting\\LojaVirtual.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.LojaVirtual.Api.props",
+      "PackagePath": "buildTransitive\\LojaVirtual.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

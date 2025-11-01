@@ -75,9 +75,6 @@
   }
 }
 
-/* =================================================================== */
-/* CORREÇÃO APLICADA AQUI                    */
-/* =================================================================== */
 .stock-info {
   font-size: 1.1rem;
   color: var(--text-primary);
@@ -86,8 +83,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.25rem 0; /* Adicionado padding vertical */
-  min-height: 24px; /* Substituído height por min-height para flexibilidade */
+  padding: 0.25rem 0;
+  min-height: 24px;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 .add-to-cart-button {
@@ -100,7 +108,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,4 +122,12 @@
     background-color: var(--primary-color-light);
     cursor: not-allowed;
   }
+}
+
+.add-to-cart-button.shake {
+  animation: shake 0.4s ease;
+}
+
+.add-to-cart-button.pulse {
+  animation: pulse 0.6s ease;
 }

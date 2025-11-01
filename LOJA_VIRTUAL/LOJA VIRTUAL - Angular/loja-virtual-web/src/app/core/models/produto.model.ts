@@ -10,6 +10,7 @@ export interface VariacaoProduto {
   cor?: string;
   preco: number;
   ativo: boolean;
+  imagemUrl: string; 
   estoque?: Estoque;
 }
 
@@ -28,6 +29,7 @@ export interface VariacaoProdutoCreateDTO {
   cor?: string;
   preco: number;
   quantidadeEstoqueInicial: number;
+  imagemUrl: string; 
 }
 
 export interface ProdutoCreateDTO {

@@ -18,6 +18,7 @@ namespace LojaVirtual.Infrastructure.Persistence.Configurations
             builder.Property(vp => vp.Cor).HasColumnName("DS_COR").HasMaxLength(50);
             builder.Property(vp => vp.Preco).HasColumnName("VL_PRECO").IsRequired().HasColumnType("decimal(10, 2)");
             builder.Property(vp => vp.Ativo).HasColumnName("FL_ATIVO").IsRequired().HasDefaultValue(true);
+            builder.Property(vp => vp.ImagemUrl).HasColumnName("URL_IMG").HasMaxLength(500);
 
             builder.Property(vp => vp.CriadoEm).HasColumnName("DT_CRIADO_EM").IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Property(vp => vp.AtualizadoEm).HasColumnName("DT_ATUALIZADO_EM").IsRequired();

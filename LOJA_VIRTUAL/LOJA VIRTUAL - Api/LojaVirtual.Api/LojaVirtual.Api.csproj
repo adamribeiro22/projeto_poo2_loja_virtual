@@ -17,4 +17,8 @@
     <ProjectReference Include="..\LojaVirtual.Infrastructure\LojaVirtual.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

@@ -81,6 +81,13 @@ export class AdminService {
     return this.http.get<Produto>(`${this.apiUrl}/api/Produtos/${id}`);
   }
 
+  uploadImagem(file: File): Observable<{ url: string }> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.http.post<{ url: string }>(`${this.apiUrl}/api/Imagens/upload`, formData);
+  }
+
   createProduto(produtoData: ProdutoCreateDTO): Observable<Produto> {
     return this.http.post<Produto>(`${this.apiUrl}/api/Produtos`, produtoData);
   }

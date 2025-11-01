@@ -232,6 +232,22 @@
     ]
   },
   {
+    "ContainingType": "LojaVirtual.Api.Controllers.ImagensController",
+    "Method": "UploadImagem",
+    "RelativePath": "api/Imagens/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "LojaVirtual.Api.Controllers.ProdutosController",
     "Method": "GetAll",
     "RelativePath": "api/Produtos",

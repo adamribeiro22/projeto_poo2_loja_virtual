@@ -119,7 +119,7 @@ namespace LojaVirtual.Application.Service
                 throw new KeyNotFoundException($"Variação de produto com ID {id} não encontrada.");
             }
 
-            variacao.Ativo = false;
+            variacao.Ativo = !variacao.Ativo;
             AuditHelper.UpdateAuditFields(variacao);
 
             _unitOfWork.VariacaoProdutoRepository.Update(variacao);

@@ -1,4 +1,4 @@
-﻿using LojaVirtual.Application.DTO.Display;
+﻿
 
 namespace LojaVirtual.Application.DTO.Creation
 {
@@ -12,6 +12,7 @@ namespace LojaVirtual.Application.DTO.Creation
         public string? Cor { get; set; }
         public decimal Preco { get; set; }
         public int QuantidadeEstoqueInicial { get; set; }
+        public string? ImagemUrl { get; set; }
     }
 
 }

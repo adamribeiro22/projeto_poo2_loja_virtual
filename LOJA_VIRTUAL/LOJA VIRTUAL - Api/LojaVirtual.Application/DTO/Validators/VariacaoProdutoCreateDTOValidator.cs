@@ -29,6 +29,10 @@ namespace LojaVirtual.Application.DTO.Validators
                 .MaximumLength(50).WithMessage("A cor não pode exceder 50 caracteres.")
                 .When(x => !string.IsNullOrEmpty(x.Cor));
 
+            RuleFor(x => x.ImagemUrl)
+                .MaximumLength(500).WithMessage("A URL da imagem deve ter no máximo 500 caracteres.")
+                .When(x => !string.IsNullOrEmpty(x.ImagemUrl));
+
             RuleFor(x => x)
                 .Must(dto => !string.IsNullOrWhiteSpace(dto.Tamanho) || !string.IsNullOrWhiteSpace(dto.Cor))
                 .WithMessage("A variação deve ter, no mínimo, um tamanho ou uma cor especificada.");

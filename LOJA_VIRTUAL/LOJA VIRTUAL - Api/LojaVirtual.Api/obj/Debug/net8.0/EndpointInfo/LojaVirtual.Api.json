@@ -358,6 +358,38 @@
         }
       }
     },
+    "/api/Imagens/upload": {
+      "post": {
+        "tags": [
+          "Imagens"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Produtos": {
       "get": {
         "tags": [
@@ -1465,6 +1497,10 @@
           "quantidadeEstoqueInicial": {
             "type": "integer",
             "format": "int32"
+          },
+          "imagemUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

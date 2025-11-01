@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, forkJoin, of, switchMap, Observable } from 'rxjs';
 import { AdminService } from '../../services/admin.service';
 import { ProdutoCreateDTO, VariacaoProduto, VariacaoProdutoCreateDTO } from '../../../../core/models/produto.model';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-product-management',
@@ -19,6 +20,10 @@ export class ProductManagementComponent implements OnInit {
   pageTitle = 'Criar Novo Produto';
   successMessage: string | null = null;
   errorMessage: string | null = null;
+  variationUploadStates = new Map<number, boolean>();
+  
+  public apiUrl = environment.apiUrl.replace(/\/$/, '');
+  public placeholderImg = 'https://placehold.co/150x150/f9f9f9/ddd?text=Imagem%20Inválida';
 
   private deletedVariationIds: number[] = [];
 
@@ -88,7 +93,8 @@ export class ProductManagementComponent implements OnInit {
           tamanho: [v.tamanho, Validators.required],
           cor: [v.cor],
           preco: [v.preco, [Validators.required, Validators.min(0.01)]],
-          quantidadeEstoqueInicial: [v.estoque?.quantidade ?? 0, [Validators.required, Validators.min(0)]]
+          quantidadeEstoqueInicial: [v.estoque?.quantidade ?? 0, [Validators.required, Validators.min(0)]],
+          imagemUrl: [v.imagemUrl || ''] 
         }));
       });
     } else {
@@ -106,12 +112,39 @@ export class ProductManagementComponent implements OnInit {
       tamanho: ['', Validators.required],
       cor: [''],
       preco: [0, [Validators.required, Validators.min(0.01)]],
-      quantidadeEstoqueInicial: [0, [Validators.required, Validators.min(0)]]
+      quantidadeEstoqueInicial: [0, [Validators.required, Validators.min(0)]],
+      imagemUrl: ['']
     });
   }
 
   adicionarVariacao(): void {
     this.variacoes.push(this.criarVariacaoFormGroup());
+  }
+
+  onFileSelected(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+
+    const file = input.files[0];
+    const variacaoFormGroup = this.variacoes.at(index);
+
+    this.variationUploadStates.set(index, true);
+    this.errorMessage = null;
+
+    this.adminService.uploadImagem(file).pipe(
+      finalize(() => this.variationUploadStates.set(index, false))
+    ).subscribe({
+      next: (response) => {
+        variacaoFormGroup.patchValue({ imagemUrl: response.url });
+        input.value = '';
+      },
+      error: (err) => {
+        this.errorMessage = `Erro ao enviar imagem da Variação ${index + 1}. Tente novamente.`;
+        input.value = '';
+      }
+    });
   }
 
   removerVariacao(index: number): void {
@@ -159,6 +192,11 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.placeholderImg;
+  }
+
   private handleUpdate(): void {
     const formValue = this.produtoForm.value;
 
@@ -178,7 +216,8 @@ export class ProductManagementComponent implements OnInit {
             cor: variacao.cor,
             preco: variacao.preco,
             quantidadeEstoqueInicial: variacao.quantidadeEstoqueInicial,
-            produtoId: this.currentProductId!
+            produtoId: this.currentProductId!,
+            imagemUrl: variacao.imagemUrl
           };
 
           if (variacao.id) {

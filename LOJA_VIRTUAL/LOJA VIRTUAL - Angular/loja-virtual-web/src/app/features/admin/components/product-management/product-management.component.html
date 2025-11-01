@@ -42,6 +42,29 @@
               <input type="number" formControlName="quantidadeEstoqueInicial" placeholder="Ex: 10">
             </div>
           </div>
+          <div class="form-section-divider"></div>
+          <div class="image-upload-section">
+            <div class="form-group">
+              <label>Imagem da Variação</label>
+              <div class="upload-wrapper">
+                <input 
+                  id="imagem-{{i}}" 
+                  type="file" 
+                  accept="image/png, image/jpeg"
+                  (change)="onFileSelected($event, i)"
+                  [disabled]="variationUploadStates.get(i)"
+                  class="file-input">
+                <label for="imagem-{{i}}" class="file-input-label" [class.disabled]="variationUploadStates.get(i)">
+                  <i class="fa-solid fa-upload"></i> Escolher Arquivo
+                </label>
+                <span *ngIf="variationUploadStates.get(i)" class="small-loader"></span>
+                <i *ngIf="variacao.get('imagemUrl')?.value && !variationUploadStates.get(i)" 
+                   class="fa-solid fa-check-circle upload-success-icon">
+                </i>
+              </div>
+            </div>
+          </div>
+
           <button
             type="button"
             (click)="removerVariacao(i)"

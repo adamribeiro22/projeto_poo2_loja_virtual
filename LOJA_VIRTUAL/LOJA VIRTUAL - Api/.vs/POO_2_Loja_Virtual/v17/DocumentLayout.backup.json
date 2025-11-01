@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4E8E1E3D-3647-4B83-BC53-5D65B6588A5B}|LojaVirtual.Api\\LojaVirtual.Api.csproj|c:\\projetos\\poo\\projeto_poo2_loja_virtual\\loja_virtual\\loja virtual - api\\lojavirtual.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E8E1E3D-3647-4B83-BC53-5D65B6588A5B}|LojaVirtual.Api\\LojaVirtual.Api.csproj|solutionrelative:lojavirtual.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4E8E1E3D-3647-4B83-BC53-5D65B6588A5B}|LojaVirtual.Api\\LojaVirtual.Api.csproj|c:\\projetos\\poo\\projeto_poo2_loja_virtual\\loja_virtual\\loja virtual - api\\lojavirtual.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E8E1E3D-3647-4B83-BC53-5D65B6588A5B}|LojaVirtual.Api\\LojaVirtual.Api.csproj|solutionrelative:lojavirtual.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E3DE04A-2705-4C93-9C31-DE32CF4D4950}|LojaVirtual.Application\\LojaVirtual.Application.csproj|c:\\projetos\\poo\\projeto_poo2_loja_virtual\\loja_virtual\\loja virtual - api\\lojavirtual.application\\service\\variacaoprodutoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E3DE04A-2705-4C93-9C31-DE32CF4D4950}|LojaVirtual.Application\\LojaVirtual.Application.csproj|solutionrelative:lojavirtual.application\\service\\variacaoprodutoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E3DE04A-2705-4C93-9C31-DE32CF4D4950}|LojaVirtual.Application\\LojaVirtual.Application.csproj|c:\\projetos\\poo\\projeto_poo2_loja_virtual\\loja_virtual\\loja virtual - api\\lojavirtual.application\\dto\\display\\variacaoprodutodisplaydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E3DE04A-2705-4C93-9C31-DE32CF4D4950}|LojaVirtual.Application\\LojaVirtual.Application.csproj|solutionrelative:lojavirtual.application\\dto\\display\\variacaoprodutodisplaydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,14 +39,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "LojaVirtual.Api\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "LojaVirtual.Api\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwBQAAABJAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\Program.cs",
+              "RelativeDocumentMoniker": "LojaVirtual.Api\\Program.cs",
+              "ToolTip": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Api\\Program.cs*",
+              "RelativeToolTip": "LojaVirtual.Api\\Program.cs*",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAF0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T23:35:41.16Z",
+              "WhenOpened": "2025-11-01T18:05:52.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VariacaoProdutoDisplayDTO.cs",
+              "DocumentMoniker": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Application\\DTO\\Display\\VariacaoProdutoDisplayDTO.cs",
+              "RelativeDocumentMoniker": "LojaVirtual.Application\\DTO\\Display\\VariacaoProdutoDisplayDTO.cs",
+              "ToolTip": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Application\\DTO\\Display\\VariacaoProdutoDisplayDTO.cs",
+              "RelativeToolTip": "LojaVirtual.Application\\DTO\\Display\\VariacaoProdutoDisplayDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T17:10:55.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VariacaoProdutoService.cs",
+              "DocumentMoniker": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Application\\Service\\VariacaoProdutoService.cs",
+              "RelativeDocumentMoniker": "LojaVirtual.Application\\Service\\VariacaoProdutoService.cs",
+              "ToolTip": "C:\\Projetos\\POO\\projeto_poo2_loja_virtual\\LOJA_VIRTUAL\\LOJA VIRTUAL - Api\\LojaVirtual.Application\\Service\\VariacaoProdutoService.cs",
+              "RelativeToolTip": "LojaVirtual.Application\\Service\\VariacaoProdutoService.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAIwFMAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-01T17:10:30.317Z",
               "EditorCaption": ""
             }
           ]

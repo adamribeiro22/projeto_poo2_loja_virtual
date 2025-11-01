@@ -141,7 +141,7 @@ namespace LojaVirtual.Application.Service
 
             foreach (var variacao in produto.Variacoes)
             {
-                variacao.Ativo = false;
+                variacao.Ativo = produto.Ativo;
                 AuditHelper.UpdateAuditFields(variacao);
             }
 

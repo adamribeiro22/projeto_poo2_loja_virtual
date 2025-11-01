@@ -66,3 +66,4 @@ C:\Projetos\POO\projeto_poo2_loja_virtual\LOJA_VIRTUAL\LOJA VIRTUAL - Api\LojaVi
 C:\Projetos\POO\projeto_poo2_loja_virtual\LOJA_VIRTUAL\LOJA VIRTUAL - Api\LojaVirtual.Api\obj\Debug\net8.0\LojaVirtual.Api.pdb
 C:\Projetos\POO\projeto_poo2_loja_virtual\LOJA_VIRTUAL\LOJA VIRTUAL - Api\LojaVirtual.Api\obj\Debug\net8.0\LojaVirtual.Api.genruntimeconfig.cache
 C:\Projetos\POO\projeto_poo2_loja_virtual\LOJA_VIRTUAL\LOJA VIRTUAL - Api\LojaVirtual.Api\obj\Debug\net8.0\ref\LojaVirtual.Api.dll
+C:\Projetos\POO\projeto_poo2_loja_virtual\LOJA_VIRTUAL\LOJA VIRTUAL - Api\LojaVirtual.Api\bin\Debug\net8.0\LojaVirtual.Api.staticwebassets.runtime.json

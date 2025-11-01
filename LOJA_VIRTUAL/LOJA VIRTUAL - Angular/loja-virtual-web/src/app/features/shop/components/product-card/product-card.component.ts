@@ -4,6 +4,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-product-card',
@@ -18,6 +19,9 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   selecaoForm: FormGroup;
   maxQuantidadePermitida = 1;
 
+  public apiUrl = environment.apiUrl;
+  private placeholderImg = '../../../../../assets/carrinho.jpg';
+
   private destroy$ = new Subject<void>();
   
   constructor(private fb: FormBuilder, private cartService: CartService) {
@@ -28,7 +32,6 @@ export class ProductCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.atualizarMaxQuantidade();
-
     this.cartService.cart$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
@@ -70,4 +73,24 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   get estoqueDisponivel(): boolean {
     return this.maxQuantidadePermitida > 0;
   }
+
+  onImageError(event: Event): void {
+    const element = event.target as HTMLImageElement;
+    element.src = this.placeholderImg;
+  }
+
+  onAddToCart(event: MouseEvent) {
+  const button = event.currentTarget as HTMLButtonElement;
+
+  if (button.disabled) {
+    button.classList.add('shake');
+    setTimeout(() => button.classList.remove('shake'), 400);
+    return;
+  }
+
+  this.adicionarAoCarrinho();
+
+  button.classList.add('pulse');
+  setTimeout(() => button.classList.remove('pulse'), 600);
+}
 }

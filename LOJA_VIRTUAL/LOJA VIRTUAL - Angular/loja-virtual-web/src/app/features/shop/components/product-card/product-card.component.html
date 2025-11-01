@@ -1,7 +1,9 @@
 <div class="product-card" *ngIf="produto && variacao">
-  <img src="../../../../../assets/carrinho.jpg" 
-       [alt]="produto.nome" 
-       class="card-image">
+  <img 
+    [src]="apiUrl + variacao.imagemUrl" 
+    [alt]="produto.nome" 
+    (error)="onImageError($event)"
+    class="card-image">
 
   <div class="card-content">
     <h3 class="card-title">{{ produto.nome }}</h3>
@@ -20,7 +22,11 @@
         <input type="number" formControlName="quantidade" min="1" [max]="maxQuantidadePermitida">
       </div>
 
-      <button type="submit" [disabled]="selecaoForm.invalid || !estoqueDisponivel" class="add-to-cart-button">
+      <button 
+        type="button"
+        [disabled]="selecaoForm.invalid || !estoqueDisponivel"
+        class="add-to-cart-button"
+        (click)="onAddToCart($event)">
         {{ estoqueDisponivel ? 'Comprar' : 'Estoque Esgotado' }}
       </button>
     </form>
